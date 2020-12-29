@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Server=DESKTOP-2G9I6MK\SQLEXPRESS;Database=PetNETv2;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entity

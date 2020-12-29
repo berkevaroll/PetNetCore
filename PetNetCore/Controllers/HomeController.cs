@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PetNetCore.Entity;
 using PetNetCore.Models;
 using System;
 using System.Collections.Generic;
@@ -12,26 +13,68 @@ namespace PetNetCore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public PetNETv2Context _db;
+        public HomeController(ILogger<HomeController> logger, PetNETv2Context db)
         {
             _logger = logger;
+            _db = db;
         }
-
+        //Index
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        //Get Register Page
+        [HttpGet]
+        public IActionResult Register()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        //Handle form data for register
+        [HttpPost]
+        public IActionResult Register(UserDto model)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            User user = new User
+            {
+                Username = model.Username,
+                Password = model.Password,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                BirthDate = model.BirthDate,
+                City = model.City,
+                Phone = model.Phone,
+                RoleId = 1,
+            };
+            _db.User.Add(user);
+            _db.SaveChanges();
+            return View("Index");
+        }
+        //Handle Login model
+        [HttpPost]
+        public IActionResult Login(UserDto model)
+        {
+
+            try
+            {
+                var user = _db.User.Where(u => u.Username == model.Username && u.Password == model.Password).FirstOrDefault();
+                if (user != null)
+                {
+                    if (user.RoleId == 1)
+                    {
+                        return View("UserLogin");
+                    }
+                    return View("AdminLogin");
+                }
+                else
+                {
+                    return Index();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return BadRequest();
+            }
         }
     }
 }
