@@ -1,12 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<form method="post" action="../Home/Login">
+<form method="post" action="../User/Login">
     <label for="inputUsername" class="visually-hidden">Username</label>
     <input  id="inputUsername" class="form-control" placeholder="Username" name="Username" required autofocus>
     <label for="inputPassword" class="visually-hidden">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="Password" required>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 </form>
-<a asp-controller="Home"
+<a asp-controller="User"
    asp-action="Register">Don't have an account yet? Click here to register.</a>

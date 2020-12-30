@@ -28,7 +28,11 @@ namespace PetNetCore
             services.AddControllersWithViews();
             services.AddDbContext<PetNETv2Context>(
     options => options.UseSqlServer("Server=DESKTOP-2G9I6MK\\SQLEXPRESS;Database=PetNETv2;Trusted_Connection=True;"));
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
+            services.AddHttpContextAccessor();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,6 +53,7 @@ namespace PetNetCore
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

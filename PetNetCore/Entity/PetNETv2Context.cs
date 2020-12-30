@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using PetNetCore.Models;
 
 namespace PetNetCore.Entity
 {
@@ -104,5 +105,7 @@ namespace PetNetCore.Entity
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<PetNetCore.Models.AnimalDto> AnimalDto { get; set; }
     }
 }
