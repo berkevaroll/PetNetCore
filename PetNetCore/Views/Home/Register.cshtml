@@ -1,0 +1,76 @@
+﻿@model PetNetCore.Models.UserDto.Register
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <th colspan="2" align="center">Register</th>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.FirstName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.BirthDate)
+            @Html.TextBoxFor(m=>m.BirthDate, "{0:d MMM yyyy}")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.City)
+            @Html.TextBoxFor(m => m.City)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.Phone)
+            @Html.TextBoxFor(m => m.Phone)
+        </td>
+    </tr>
+    <td></td>
+    <td><input type="submit" value="Submit" /></td>
+</table>
+    @*<label for="inputUsername" class="visually-hidden">Username</label>
+    <input id="inputUsername" class="form-control" placeholder="Username" name="Username" required autofocus>
+    <label for="inputPassword" class="visually-hidden">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="Password" required>
+    <label for="inputFirstName" class="visually-hidden">First Name</label>
+    <input id="inputFirstName" class="form-control" placeholder="First Name" name="FirstName" required autofocus>
+    <label for="inputLastName" class="visually-hidden">Last Name</label>
+    <input id="inputLastName" class="form-control" placeholder="Last Name" name="LastName" required>
+    <label for="inputBirthDate" class="visually-hidden">Username</label>
+    <input type="date" id="inputBirthDate" class="form-control" placeholder="BirthDate" name="BirthDate" required autofocus>
+    <label for="inputCity" class="visually-hidden">City</label>
+    <input id="inputCity" class="form-control" placeholder="City" name="City" required>
+    <label for="inputPhone" class="visually-hidden">Phone</label>
+    <input type="number" id="inputPhone" class="form-control" placeholder="Phone" name="Phone" required>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>*@
+}
+<a asp-controller="Home"
+   asp-action="Index">Already have an account? Click here to Sign in.</a>
+

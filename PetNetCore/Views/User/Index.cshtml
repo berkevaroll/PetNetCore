@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    @Html.ActionLink("Add Animal", "Create", "Animal");
+    @using (Html.BeginForm("Logout", "User", FormMethod.Post))
+    {
+        <button type="submit">Logout</button>
+    };
+</div>

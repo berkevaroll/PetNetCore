@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +29,13 @@ namespace PetNetCore
         {
             services.AddControllersWithViews();
             services.AddDbContext<PetNETv2Context>(
-    options => options.UseSqlServer("Server=DESKTOP-2G9I6MK\\SQLEXPRESS;Database=PetNETv2;Trusted_Connection=True;"));
+               options => options.UseSqlServer("Server=DESKTOP-2G9I6MK\\SQLEXPRESS;Database=PetNETv2;Trusted_Connection=True;"));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(o =>
+                {
+                    o.LoginPath = "/Home/Index";
+                    o.Cookie.Name = "petnetcore_session";
+                });
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
             services.AddHttpContextAccessor();
@@ -51,7 +59,7 @@ namespace PetNetCore
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>

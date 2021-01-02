@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using PetNetCore.Models;
 
 namespace PetNetCore.Entity
 {
@@ -25,7 +24,7 @@ namespace PetNetCore.Entity
         {
             if (!optionsBuilder.IsConfigured)
             {
-/*warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.*/
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-2G9I6MK\\SQLEXPRESS;Database=PetNETv2;Trusted_Connection=True;");
             }
         }
@@ -38,9 +37,7 @@ namespace PetNetCore.Entity
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Photo)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Photo).HasMaxLength(50);
 
                 entity.HasOne(d => d.Breed)
                     .WithMany(p => p.Animal)
@@ -105,7 +102,5 @@ namespace PetNetCore.Entity
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<PetNetCore.Models.AnimalDto> AnimalDto { get; set; }
     }
 }

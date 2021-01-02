@@ -1,12 +1,32 @@
-﻿@{
+﻿@model PetNetCore.Models.UserDto.Login
+
+@{ 
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form method="post" action="../User/Login">
-    <label for="inputUsername" class="visually-hidden">Username</label>
-    <input  id="inputUsername" class="form-control" placeholder="Username" name="Username" required autofocus>
-    <label for="inputPassword" class="visually-hidden">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="Password" required>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-</form>
-<a asp-controller="User"
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th colspan="2" align="center">Register</th>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m=>m.Username) 
+                @Html.TextBoxFor(m => m.Username)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m=>m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </td>
+        </tr>
+
+        <td></td>
+        <td><input type="submit" value="Submit" /></td>
+    </table>
+}
+
+<a asp-controller="Home"
    asp-action="Register">Don't have an account yet? Click here to register.</a>
