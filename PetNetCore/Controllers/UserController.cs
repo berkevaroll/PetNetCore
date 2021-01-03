@@ -143,8 +143,8 @@ namespace PetNetCore.Controllers
                 var blogPost = new BlogPost
                 {
                     BlogTitle = model.BlogTitle,
-                    BlogContent = model.BlogTitle,
-                    Photo = model.Photo,
+                    BlogContent = model.BlogContent,
+                    Photo = uniqueFileName,
                     UserId = Int32.Parse(userId),
                 };
                 _context.BlogPost.Add(blogPost);
