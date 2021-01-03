@@ -20,6 +20,7 @@ namespace PetNetCore.Entity
         public string City { get; set; }
         public decimal Phone { get; set; }
         public int RoleId { get; set; }
+        public string Photo { get; set; }
 
         public virtual Role Role { get; set; }
         public virtual ICollection<Animal> Animal { get; set; }

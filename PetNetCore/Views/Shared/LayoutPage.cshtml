@@ -22,21 +22,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Sahiplenme/">Adoption</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Forum/">Forum</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Iletisim/">Contact</a>
-                    </li>
-
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/Sahiplendirme/">"Rehome"</a>
+                            <a class="nav-link" href="/Animal/List/">Adoption</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Index/">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Iletisim/">Contact</a>
                         </li>
                         @*<li class="nav-item">
                                 <a class="nav-link" href="/Home/İletisim/">İLETİŞİM</a>
@@ -47,20 +42,20 @@
                                 <a class="nav-link" href="/Admin/Index" target="_blank">Admin Panel</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/User/Index/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
+                                <a class="nav-link" href="/User/Account/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="/User/Logout/"><b>(X)</b> </a>
+                                <a class="nav-link" href="/User/Logout"><i class="fas-fa exit"></i> </a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="/User/Index/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
+                                <a class="nav-link" href="/User/Account/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/User/Logout/">Logout</a>
+                                @Html.ActionLink("Logout","Logout","User", new { htmlAttributes = new { @class = "nav-link" } })
                             </li>
                         }
                     }
@@ -68,12 +63,12 @@
                     {
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/User/Create/">Register</a>
+                            <a class="nav-link" href="/Home/Register/">Register</a>
                         </li>
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/User/Login/">Login</a>
+                            <a class="nav-link" href="/Home/Index/">Login</a>
                         </li>
 
                     }

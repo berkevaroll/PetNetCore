@@ -12,7 +12,9 @@ namespace PetNetCore.Models
         public int Age { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
+        public string BreedName { get; set; }
+        public string Username { get; set; }
+
         public int? BreedId { get; set; }
-        public int UserId { get; set; }
     }
 }

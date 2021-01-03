@@ -1,7 +1,8 @@
-﻿
+﻿@model IEnumerable<PetNetCore.Models.BlogPostDto.List>
+
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
 }
 <div class="container">
     @using (Html.BeginForm("List", "Animal", FormMethod.Post))
@@ -27,8 +28,46 @@
             <button type="submit">Admin Panel</button>
         }
     }
-    @using (Html.BeginForm("Logout", "User", FormMethod.Post))
+    @using (Html.BeginForm("Logout", "User", FormMethod.Get))
     {
         <button type="submit">Logout</button>
     };
 </div>
+<h2>Blogs</h2>
+
+@{
+    if (User.Claims.Where(c=>c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").FirstOrDefault().Value == "2")
+    {
+        <p>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="/Home/ForumCreate/">Add Post</a>
+                </div>
+            </div>
+
+        </p>
+    }
+
+}
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-12 col-sm-3 portfolio-item">
+        <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="@item.Photo" alt=""></a>
+            <div class="card-body">
+                <h3>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BlogTitle)
+                    </td>
+                </h3>
+                <hr />
+                <p> <b>Publisher : </b>@Html.DisplayFor(modelItem => item.Username)</p>
+                <hr />
+                <p> <b>Content :  </b> @Html.DisplayFor(modelItem => item.BlogContent)</p>
+
+
+            </div>
+        </div>
+    </div>
+}

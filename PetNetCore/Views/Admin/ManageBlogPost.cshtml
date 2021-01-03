@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => blogpost.Username)
             </td>
             <td>
-                @Html.ActionLink("Details", "BlogPostDetails", new { id = blogpost.Id })|
+                @Html.ActionLink("Details", "BlogPostDetails", new { id = blogpost.Id }) |
                 @Html.ActionLink("Delete", "DeleteBlogPost", new { id = blogpost.Id })
             </td>
         </tr>

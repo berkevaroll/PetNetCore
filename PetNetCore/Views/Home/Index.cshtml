@@ -39,29 +39,5 @@
     </div>
 }
 
-@*@using (Html.BeginForm("Login", "Home", FormMethod.Post))
-    {
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th colspan="2" align="center">Register</th>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(m => m.Username)
-                    @Html.TextBoxFor(m => m.Username)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password)
-                </td>
-            </tr>
-
-            <td></td>
-            <td><input type="submit" value="Submit" /></td>
-        </table>
-    }*@
-
 <a asp-controller="Home"
    asp-action="Register">Don't have an account yet? Click here to register.</a>

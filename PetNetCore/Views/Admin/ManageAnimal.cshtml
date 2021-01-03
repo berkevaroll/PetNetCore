@@ -1,4 +1,4 @@
-﻿@using PetNetCore.Entity;
+﻿@using PetNetCore.Models;
 @{
     ViewData["Title"] = "ManageAnimal";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,57 +22,42 @@
         <th>
             @Html.DisplayName("Breed")
         </th>
+        <th>
+            @Html.DisplayName("Owner")
+        </th>
         <th></th>
     </tr>
 
-    @foreach (Animal animal in (List<Animal>)ViewBag.animals)
+    @foreach (AnimalDto animal in (List<AnimalDto>)ViewBag.animals)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => animal.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => animal.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => animal.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => animal.Photo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => animal.BreedId)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "AnimalDetails", new { id = animal.Id} )|
-                @Html.ActionLink("Delete", "DeleteAnimal", new { id = animal.Id })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => animal.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => animal.Age)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => animal.Description)
+    </td>
+    <td>
+        <a href="#"><img width="75 src="~/images/@animal.Photo"></a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => animal.BreedName)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => animal.Username)
+    </td>
+    <td>
+        @Html.ActionLink("Details", "AnimalDetails", new { id = animal.Id }) |
+        @Html.ActionLink("Delete", "DeleteAnimal", new { id = animal.Id })
+    </td>
+</tr>
     }
 
 </table>
-<h1>View</h1>
-<table class="table-primary" border="1" cellpadding="2" cellspacing="2">
-    <tr>
-
-        <th>Name</th>
-        <th>Age</th>
-        <th>Description</th>
-        <th>Photo</th>
-        <th>Breed</th>
-    </tr>
-    @foreach (Animal animal in (List<Animal>)ViewBag.animals)
-    {
-        <tr>
-            <td>@animal.Name</td>
-            <td>@animal.Age</td>
-            <td>@animal.Description</td>
-            <td>@animal.Photo</td>
-            <td>@animal.BreedId</td>
-        </tr>
-    }
-</table>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

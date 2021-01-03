@@ -24,9 +24,18 @@ namespace PetNetCore.Controllers
             return View();
         }
 
+        #region Animal Operations
         public IActionResult ManageAnimal()
         {
-            ViewBag.animals = _context.Animal.ToList();
+            ViewBag.animals = _context.Animal.Include(a => a.User).Include(a => a.Breed).Select(s => new AnimalDto
+            {
+                Name = s.Name,
+                Age = s.Age,
+                Description = s.Description,
+                Photo = s.Photo,
+                BreedName = s.Breed.BreedName,
+                Username = s.User.Username,
+            }).ToList();
             return View();
         }
         [HttpPost]
@@ -36,13 +45,15 @@ namespace PetNetCore.Controllers
         }
         public IActionResult AnimalDetails(int? id)
         {
-            var animal = _context.Animal.Where(a => a.Id == id).Select(s => new AnimalDto
+            var animal = _context.Animal.Where(a => a.Id == id).Include(a => a.User).Include(a => a.Breed).Select(s => new AnimalDto
             {
                 Name = s.Name,
                 Age = s.Age,
                 Description = s.Description,
                 Photo = s.Photo,
-                UserId = s.UserId
+                BreedName = s.Breed.BreedName,
+                Username = s.User.Username,
+                BreedId = s.BreedId,
             }).FirstOrDefault();
             return View(animal);
         }
@@ -53,6 +64,24 @@ namespace PetNetCore.Controllers
             _context.SaveChanges();
             return RedirectToAction("ManageAnimal");
         }
+        [HttpPost]
+        public IActionResult UpdateAnimal(AnimalDto model)
+        {
+            var animal = _context.Animal.Where(a => a.Id == model.Id).FirstOrDefault();
+            animal.Name = model.Name;
+            animal.Age = model.Age;
+            animal.Description = model.Description;
+            animal.Photo = model.Photo;
+            animal.BreedId = model.BreedId;
+
+            _context.Update(animal);
+            _context.SaveChanges();
+            return RedirectToAction("ManageAnimal");
+        }
+
+
+        #endregion
+        #region User Operations
         public IActionResult ManageUser()
         {
             ViewBag.users = _context.User.Select(s => new User
@@ -108,6 +137,8 @@ namespace PetNetCore.Controllers
             _context.SaveChanges();
             return RedirectToAction("ManageUser");
         }
+        #endregion
+        #region BlogPost Operations
         public IActionResult ManageBlogPost()
         {
             ViewBag.blogposts = _context.BlogPost.Include(m => m.User).Select(s => new BlogPostDto.List
@@ -127,7 +158,7 @@ namespace PetNetCore.Controllers
         }
         public IActionResult BlogPostDetails(int? id)
         {
-            var blogPost = _context.BlogPost.Include(c=>c.User).Where(a => a.Id == id).Select(s => new BlogPostDto.List
+            var blogPost = _context.BlogPost.Include(c => c.User).Where(a => a.Id == id).Select(s => new BlogPostDto.List
 
             {
                 BlogTitle = s.BlogTitle,
@@ -146,5 +177,6 @@ namespace PetNetCore.Controllers
             _context.SaveChanges();
             return RedirectToAction("ManageBlogPost");
         }
+        #endregion
     }
 }

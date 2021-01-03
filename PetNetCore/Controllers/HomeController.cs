@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,9 +9,11 @@ using PetNetCore.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace PetNetCore.Controllers
 {
@@ -18,16 +21,18 @@ namespace PetNetCore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHostingEnvironment _env;
         public PetNETv2Context _context;
-        public HomeController(ILogger<HomeController> logger, PetNETv2Context context, IHttpContextAccessor httpContextAccessor)
+        public HomeController(ILogger<HomeController> logger, PetNETv2Context context, IHttpContextAccessor httpContextAccessor, IHostingEnvironment env)
         {
             _logger = logger;
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _env = env;
         }
         public IActionResult Index()
         {
-            
+
             return View();
         }
         public IActionResult Login()
@@ -39,7 +44,7 @@ namespace PetNetCore.Controllers
         public async Task<IActionResult> Login(UserDto.Login model)
         {
             var user = _context.User.Where(m => m.Username == model.Username && m.Password == model.Password).FirstOrDefault();
-            if(user != null)
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
@@ -60,9 +65,22 @@ namespace PetNetCore.Controllers
 
             return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Register(UserDto.Register model)
+        public async Task<IActionResult> Register(UserDto.Register model, IFormFile photo)
         {
+            string uniqueFileName = null;
+            if (photo != null)
+            {
+                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(fileStream);
+                }
+            }
+
             var user = new User
             {
                 Username = model.Username,
@@ -71,13 +89,23 @@ namespace PetNetCore.Controllers
                 LastName = model.LastName,
                 BirthDate = model.BirthDate,
                 City = model.City,
+                Photo = uniqueFileName,
                 Phone = model.Phone,
                 RoleId = 1,
 
             };
             _context.User.Add(user);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Login",new UserDto.Login {
+            Username = model.Username, Password= model.Password});
+        }
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + ".png";
         }
     }
 }
