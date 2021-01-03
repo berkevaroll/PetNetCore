@@ -8,6 +8,7 @@ namespace PetNetCore.Entity
         public User()
         {
             Animal = new HashSet<Animal>();
+            BlogPost = new HashSet<BlogPost>();
         }
 
         public int Id { get; set; }
@@ -22,5 +23,6 @@ namespace PetNetCore.Entity
 
         public virtual Role Role { get; set; }
         public virtual ICollection<Animal> Animal { get; set; }
+        public virtual ICollection<BlogPost> BlogPost { get; set; }
     }
 }

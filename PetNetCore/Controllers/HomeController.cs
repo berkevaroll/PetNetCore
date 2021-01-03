@@ -27,6 +27,7 @@ namespace PetNetCore.Controllers
         }
         public IActionResult Index()
         {
+            
             return View();
         }
         public IActionResult Login()

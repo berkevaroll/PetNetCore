@@ -1,0 +1,29 @@
+﻿@using PetNetCore.Models
+
+@{
+    ViewData["Title"] = "ManageBlogPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Manage BlogPost</h1>
+<table class="table-primary" border="1" cellpadding="2" cellspacing="2">
+    <tr>
+
+        <th>BlogTitle</th>
+        <th>BlogContent</th>
+        <th>Photo</th>
+        <th>Username</th>
+    </tr>
+    @foreach (BlogPostDto.List blogpost in (List<BlogPostDto.List>)ViewBag.blogposts)
+    {
+        <tr>
+            <td>@blogpost.BlogTitle</td>
+            <td>@blogpost.BlogContent</td>
+            <td>@blogpost.Photo</td>
+            <td>@blogpost.Username</td>
+        </tr>
+    }
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

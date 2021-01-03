@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using PetNetCore.Models;
 
 namespace PetNetCore.Entity
 {
@@ -16,6 +17,7 @@ namespace PetNetCore.Entity
         }
 
         public virtual DbSet<Animal> Animal { get; set; }
+        public virtual DbSet<BlogPost> BlogPost { get; set; }
         public virtual DbSet<Breed> Breed { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -49,6 +51,25 @@ namespace PetNetCore.Entity
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Animal_User");
+            });
+
+            modelBuilder.Entity<BlogPost>(entity =>
+            {
+                entity.Property(e => e.BlogContent)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.BlogTitle)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Photo).HasMaxLength(50);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.BlogPost)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BlogPost_User");
             });
 
             modelBuilder.Entity<Breed>(entity =>
@@ -102,5 +123,7 @@ namespace PetNetCore.Entity
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<PetNetCore.Models.AnimalDto> AnimalDto { get; set; }
     }
 }

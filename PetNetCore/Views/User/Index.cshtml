@@ -4,7 +4,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-    @Html.ActionLink("Add Animal", "Create", "Animal");
+    @using (Html.BeginForm("List", "Animal", FormMethod.Post))
+    {
+        <button type="submit">List All Animals</button>
+    }
+    @using (Html.BeginForm("ListByUserId", "Animal", FormMethod.Post))
+    {
+        <button type="submit">List My Animals</button>
+    }
+    @using (Html.BeginForm("Create", "Animal", FormMethod.Post))
+    {
+        <button type="submit">Add Animal</button>
+    }
+    @using (Html.BeginForm("ListBlogPosts", "User", FormMethod.Post))
+    {
+        <button type="submit">List Blog Posts</button>
+    }
+    @if (User.Claims.Where(c => c.Value == "Administrator").FirstOrDefault() != null)
+    {
+        using (Html.BeginForm("Index", "Admin", FormMethod.Post))
+        {
+            <button type="submit">Admin Panel</button>
+        }
+    }
     @using (Html.BeginForm("Logout", "User", FormMethod.Post))
     {
         <button type="submit">Logout</button>

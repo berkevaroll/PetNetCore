@@ -26,11 +26,18 @@ namespace PetNetCore.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Administrator")]
+        
         public ActionResult List()
         {
             ViewBag.animals = _context.Animal.ToList();
             return View();
+        }
+        [HttpPost]
+        public ActionResult ListByUserId()
+        {
+            string userId = User.Claims.Where(c => c.Type == "UserId").FirstOrDefault().Value;
+            ViewBag.animals = _context.Animal.Where(m=> m.UserId == Int32.Parse(userId)).ToList();
+            return View("List");
         }
         public ActionResult Create()
         {

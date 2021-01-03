@@ -1,32 +1,67 @@
 ﻿@model PetNetCore.Models.UserDto.Login
 
-@{ 
-    ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
 }
+
+<h2>User Login</h2>
+
+
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    <table cellpadding="0" cellspacing="0">
-        <tr>
-            <th colspan="2" align="center">Register</th>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m=>m.Username) 
-                @Html.TextBoxFor(m => m.Username)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(m=>m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </td>
-        </tr>
+    <div class="form-horizontal col-md-5">
+        <span class="alert-danger"> <b>@ViewBag.Error</b> </span>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, "Username", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <td></td>
-        <td><input type="submit" value="Submit" /></td>
-    </table>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="SignIn" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
+
+@*@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Register</th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Username)
+                    @Html.TextBoxFor(m => m.Username)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                </td>
+            </tr>
+
+            <td></td>
+            <td><input type="submit" value="Submit" /></td>
+        </table>
+    }*@
 
 <a asp-controller="Home"
    asp-action="Register">Don't have an account yet? Click here to register.</a>

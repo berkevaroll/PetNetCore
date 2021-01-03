@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>PETNETCORE</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/blog-home.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index/">PETNETCore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Sahiplenme/">Adoption</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Forum/">Forum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Iletisim/">Contact</a>
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Sahiplendirme/">"Rehome"</a>
+                        </li>
+                        @*<li class="nav-item">
+                                <a class="nav-link" href="/Home/İletisim/">İLETİŞİM</a>
+                            </li>*@
+                        if (User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").FirstOrDefault().Value == "Administrator")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/Index" target="_blank">Admin Panel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Index/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Logout/"><b>(X)</b> </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Index/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Logout/">Logout</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Create/">Register</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Login/">Login</a>
+                        </li>
+
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                @RenderBody()
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+                <div class="card my-4">
+                    <h5 class="card-header">Donate</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="http://www.wwf.org.tr/sizneyapabilirsiniz/ba_yapn/">WWF</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://fonzip.com/haytap/bagis">HAYTAP</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.temizmama.com/barinaklara-bagis">TEMİZMAMA</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="http://haciko.org.tr/">HAÇİKO</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://dost.org.tr/bagis/">DOST.ORG</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.haykonfed.org/2017/02/06/haykonfed-bagis-bilgileri/">HAYKONFED</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Rights</h5>
+                    <div class="card-body">
+                        blabla
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <ul>
+            <li>@Html.ActionLink("TR", "index", new { Language = "tr" })</li>
+            <li>@Html.ActionLink("EN", "index", new { Language = "en" })</li>
+        </ul>
+        <div class="container">
+            <p class="m-0 text-center text-white"><b>BEYZA KARACA~ECE NUR ARSLAN~BERKE VAROL</b></p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

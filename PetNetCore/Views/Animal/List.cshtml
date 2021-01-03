@@ -5,23 +5,39 @@
 
 <h1>View</h1>
 
-<table class="table-primary" border="1" cellpadding="2" cellspacing="2">
-    <tr>
+<div class="container">
+    <div class="row">
 
-        <th>Name</th>
-        <th>Age</th>
-        <th>Description</th>
-        <th>Photo</th>
-        <th>Breed</th>
-    </tr>
-    @foreach (Animal animal in (List<Animal>)ViewBag.animals)
-        {
-    <tr>
-        <td>@animal.Name</td>
-        <td>@animal.Age</td>
-        <td>@animal.Description</td>
-        <td>@animal.Photo</td>
-        <td>@animal.BreedId</td>
-    </tr>
-        }
-</table>
+
+        <div class="col-md-12">
+            <h4>Bootstrap Snipp for Datatable</h4>
+            <div class="table-responsive">
+
+                <table id="mytable" class="table table-bordred table-striped" border="1" cellpadding="2" cellspacing="2">
+                    <tr>
+
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Description</th>
+                        <th>Photo</th>
+                        <th>Breed</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    @foreach (Animal animal in (List<Animal>)ViewBag.animals)
+                    {
+                        <tr>
+                            <td>@animal.Name</td>
+                            <td>@animal.Age</td>
+                            <td>@animal.Description</td>
+                            <td>@animal.Photo</td>
+                            <td>@animal.BreedId</td>
+                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" value="Edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" value="Delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
