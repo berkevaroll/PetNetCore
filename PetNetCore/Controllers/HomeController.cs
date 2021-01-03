@@ -32,7 +32,10 @@ namespace PetNetCore.Controllers
         }
         public IActionResult Index()
         {
-
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "User");
+            }
             return View();
         }
         public IActionResult Login()
@@ -46,11 +49,15 @@ namespace PetNetCore.Controllers
             var user = _context.User.Where(m => m.Username == model.Username && m.Password == model.Password).FirstOrDefault();
             if (user != null)
             {
+                string role;
+                if (user.RoleId == 1) { role = "User"; }
+                else if (user.RoleId == 2) { role = "Administrator"; }
+                else { role = "Blogger"; }
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim("UserId", user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, (user.RoleId == 1) ? "User":"Administrator"),
+                    new Claim(ClaimTypes.Role, role),
 
                 };
                 var claimsIdentity = new ClaimsIdentity(claims, "Login");
@@ -96,16 +103,11 @@ namespace PetNetCore.Controllers
             };
             _context.User.Add(user);
             _context.SaveChanges();
-            return RedirectToAction("Login",new UserDto.Login {
-            Username = model.Username, Password= model.Password});
-        }
-        private string GetUniqueFileName(string fileName)
-        {
-            fileName = Path.GetFileName(fileName);
-            return Path.GetFileNameWithoutExtension(fileName)
-                      + "_"
-                      + Guid.NewGuid().ToString().Substring(0, 4)
-                      + ".png";
+            return RedirectToAction("Login", new UserDto.Login
+            {
+                Username = model.Username,
+                Password = model.Password
+            });
         }
     }
 }

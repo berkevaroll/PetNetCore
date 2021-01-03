@@ -12,6 +12,8 @@
         <th>Photo</th>
         <th>Username</th>
     </tr>
+    @if (ViewBag.blogposts.Count > 0)
+    {
     @foreach (BlogPostDto.List blogpost in (List<BlogPostDto.List>)ViewBag.blogposts)
     {
         <tr>
@@ -20,5 +22,8 @@
             <td>@blogpost.Photo</td>
             <td>@blogpost.Username</td>
         </tr>
-    }
+    }}
 </table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,30 +1,5 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Admin Panel";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-Wlcome to admin panel ! ;)
-<div class="container-fluid">
-    @using (Html.BeginForm("ManageAnimal", "Admin", FormMethod.Get))
-    {
-        <button type="submit">Manage Animals</button>
-    }
-    @using (Html.BeginForm("ManageUser", "Admin", FormMethod.Get))
-    {
-        <button type="submit">Manage Users</button>
-    }
-    @using (Html.BeginForm("ManageBlogPost", "Admin", FormMethod.Get))
-    {
-        <button type="submit">Manage BlogPosts</button>
-    }
-    @using (Html.BeginForm("Index", "User", FormMethod.Get))
-    {
-        <button type="submit">Return to HomePage</button>
-    }
-
-    @using (Html.BeginForm("Logout", "User", FormMethod.Post))
-    {
-        <button type="submit">Logout</button>
-    }
-    
-</div>

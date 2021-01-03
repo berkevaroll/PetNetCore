@@ -1,7 +1,7 @@
 ﻿@using PetNetCore.Models;
 @{
     ViewData["Title"] = "ManageAnimal";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <h2>Animals</h2>
 
@@ -16,9 +16,11 @@
         <th>
             @Html.DisplayName("Description")
         </th>
+
         <th>
             @Html.DisplayName("Photo")
         </th>
+
         <th>
             @Html.DisplayName("Breed")
         </th>
@@ -30,31 +32,37 @@
 
     @foreach (AnimalDto animal in (List<AnimalDto>)ViewBag.animals)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => animal.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => animal.Age)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => animal.Description)
-    </td>
-    <td>
-        <a href="#"><img width="75 src="~/images/@animal.Photo"></a>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => animal.BreedName)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => animal.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => animal.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => animal.Description)
+            </td>
+            @if (animal.Photo != null)
+            {
+                <td>
+                    <a href="#"><img width="75" src="~/images/@animal.Photo"></a>
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => animal.BreedName)
+            </td>
 
-    <td>
-        @Html.DisplayFor(modelItem => animal.Username)
-    </td>
-    <td>
-        @Html.ActionLink("Details", "AnimalDetails", new { id = animal.Id }) |
-        @Html.ActionLink("Delete", "DeleteAnimal", new { id = animal.Id })
-    </td>
-</tr>
+            <td>
+                @Html.DisplayFor(modelItem => animal.Username)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "AnimalDetails", new { id = animal.Id }) | @Html.ActionLink("Delete", "DeleteAnimal", new { id = animal.Id })
+            </td>
+        </tr>
     }
 
 </table>

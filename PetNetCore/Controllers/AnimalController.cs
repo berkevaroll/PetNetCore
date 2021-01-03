@@ -49,7 +49,15 @@ namespace PetNetCore.Controllers
         public ActionResult ListByUserId()
         {
             string userId = User.Claims.Where(c => c.Type == "UserId").FirstOrDefault().Value;
-            ViewBag.animals = _context.Animal.Where(m=> m.UserId == Int32.Parse(userId)).ToList();
+            ViewBag.animals = _context.Animal.Where(m=> m.UserId == Int32.Parse(userId)).Select(s => new AnimalDto
+            {
+                Name = s.Name,
+                Age = s.Age,
+                Description = s.Description,
+                Photo = s.Photo,
+                BreedName = s.Breed.BreedName,
+                Username = s.User.Username,
+            }).ToList();
             return View("List");
         }
         public ActionResult Create()

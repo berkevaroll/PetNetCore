@@ -1,7 +1,7 @@
 ﻿@model PetNetCore.Models.UserDto.Register
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
 <h2>Detaylar</h2>
@@ -41,6 +41,17 @@
         <dd>
             @Html.DisplayFor(model => model.BirthDate)
         </dd>
+        
+        <dt>
+            @Html.DisplayName("Photo")
+        </dt>
+        @if(Model.Photo != null)
+        {
+        <dd>
+            <img width="75" src="~/images/@Model.Photo" />
+        </dd>
+
+        }
 
         <dt>
             @Html.DisplayName("City")

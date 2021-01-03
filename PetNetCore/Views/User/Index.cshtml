@@ -4,57 +4,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/LayoutPage.cshtml";
 }
-<div class="container">
-    @using (Html.BeginForm("List", "Animal", FormMethod.Post))
-    {
-        <button type="submit">List All Animals</button>
-    }
-    @using (Html.BeginForm("ListByUserId", "Animal", FormMethod.Post))
-    {
-        <button type="submit">List My Animals</button>
-    }
-    @using (Html.BeginForm("Create", "Animal", FormMethod.Post))
-    {
-        <button type="submit">Add Animal</button>
-    }
-    @using (Html.BeginForm("ListBlogPosts", "User", FormMethod.Post))
-    {
-        <button type="submit">List Blog Posts</button>
-    }
-    @if (User.Claims.Where(c => c.Value == "Administrator").FirstOrDefault() != null)
-    {
-        using (Html.BeginForm("Index", "Admin", FormMethod.Post))
-        {
-            <button type="submit">Admin Panel</button>
-        }
-    }
-    @using (Html.BeginForm("Logout", "User", FormMethod.Get))
-    {
-        <button type="submit">Logout</button>
-    };
-</div>
+
 <h2>Blogs</h2>
-
-@{
-    if (User.Claims.Where(c=>c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").FirstOrDefault().Value == "2")
-    {
-        <p>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <a href="/Home/ForumCreate/">Add Post</a>
-                </div>
-            </div>
-
-        </p>
-    }
-
-}
 
 @foreach (var item in Model)
 {
     <div class="col-lg-12 col-sm-3 portfolio-item">
         <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="@item.Photo" alt=""></a>
+            <a href="#"><img class="card-img-top" src="~/images/@item.Photo" alt=""></a>
             <div class="card-body">
                 <h3>
                     <td>

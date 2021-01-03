@@ -28,40 +28,33 @@
                             <a class="nav-link" href="/Animal/List/">Adoption</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/User/Index/">Blogs</a>
+                            <a class="nav-link" href="/Animal/Create/">Rehome</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Home/Iletisim/">Contact</a>
+                            <a class="nav-link" href="/User/Index/">Blogs</a>
                         </li>
-                        @*<li class="nav-item">
-                                <a class="nav-link" href="/Home/İletisim/">İLETİŞİM</a>
-                            </li>*@
                         if (User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").FirstOrDefault().Value == "Administrator")
                         {
                             <li class="nav-item">
                                 <a class="nav-link" href="/Admin/Index" target="_blank">Admin Panel</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/User/Account/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="/User/Logout"><i class="fas-fa exit"></i> </a>
-                            </li>
                         }
-                        else
+                        if (User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").FirstOrDefault().Value != "User")
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="/User/Account/@User.Claims.Where(c=> c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Logout","Logout","User", new { htmlAttributes = new { @class = "nav-link" } })
+                                <a class="nav-link" asp-action="AddBlogPost" asp-controller="User" target="_blank">Add Blog Post</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Account/@User.Claims.Where(c => c.Type == "UserId").FirstOrDefault().Value"><b>@User.Identity.Name</b></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Logout" target="_blank">Logout</a>
+                        </li>
                     }
                     else
                     {
-
                         <li class="nav-item">
                             <a class="nav-link" href="/Home/Register/">Register</a>
                         </li>
@@ -70,8 +63,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/Home/Index/">Login</a>
                         </li>
-
                     }
+
 
                 </ul>
             </div>

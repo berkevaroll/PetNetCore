@@ -35,6 +35,7 @@ namespace PetNetCore
                 {
                     o.LoginPath = "/Home/Index";
                     o.Cookie.Name = "petnetcore_session";
+                    o.AccessDeniedPath = "/Home/Index";
                 });
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();

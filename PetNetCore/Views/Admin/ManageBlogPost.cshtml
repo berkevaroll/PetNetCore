@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "ManageBlogPost";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
 }
@@ -35,15 +35,22 @@
             <td>
                 @Html.DisplayFor(modelItem => blogpost.BlogContent)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => blogpost.Photo)
-            </td>
+            @if (blogpost.Photo != null)
+            {
+                <td>
+                    <a href="#"><img width="75" src="~/images/@blogpost.Photo"></a>
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => blogpost.Username)
             </td>
             <td>
-                @Html.ActionLink("Details", "BlogPostDetails", new { id = blogpost.Id }) |
-                @Html.ActionLink("Delete", "DeleteBlogPost", new { id = blogpost.Id })
+                @Html.ActionLink("Details", "BlogPostDetails", new { id = blogpost.Id }) | @Html.ActionLink("Delete", "DeleteBlogPost", new { id = blogpost.Id })
+
             </td>
         </tr>
     }

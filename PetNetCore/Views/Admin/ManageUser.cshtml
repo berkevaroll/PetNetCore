@@ -2,14 +2,9 @@
 
 @{
     ViewData["Title"] = "ManageUser";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-@using PetNetCore.Entity;
-@{
-    ViewData["Title"] = "ManageAnimal";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 <h2>Animals</h2>
 
 <table class="table">
@@ -29,6 +24,9 @@
         </th>
         <th>
             @Html.DisplayName("City")
+        </th>
+        <th>
+            @Html.DisplayName("Photo")
         </th>
         <th>
             @Html.DisplayName("Phone")
@@ -54,12 +52,21 @@
             <td>
                 @Html.DisplayFor(modelItem => user.City)
             </td>
+            @if (user.Photo != null)
+            {
+                <td>
+                    <a href="#"><img width="75" src="~/images/@user.Photo"></a>
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => user.Phone)
             </td>
             <td>
-                @Html.ActionLink("Details", "UserDetails", new { id = user.Id }) |
-                @Html.ActionLink("Delete", "DeleteUser", new { id = user.Id })
+                @Html.ActionLink("Details", "UserDetails", new { id = user.Id }) | @Html.ActionLink("Delete", "DeleteUser", new { id = user.Id })
             </td>
         </tr>
     }

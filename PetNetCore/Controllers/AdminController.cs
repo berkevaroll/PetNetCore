@@ -21,7 +21,7 @@ namespace PetNetCore.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return  RedirectToAction("ManageUser");
         }
 
         #region Animal Operations
@@ -35,6 +35,7 @@ namespace PetNetCore.Controllers
                 Photo = s.Photo,
                 BreedName = s.Breed.BreedName,
                 Username = s.User.Username,
+                Id = s.Id,
             }).ToList();
             return View();
         }

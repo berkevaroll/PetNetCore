@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>PETNETCORE</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/blog-home.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/Home/Index/">PETNETCore</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/Admin/ManageAnimal" class="nav-link"><i class="fa fa-edit fa-fw"></i>Animals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/ManageUser" class="nav-link"><i class="fa fa-edit fa-fw"></i>Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/ManageBlogPost" class="nav-link"><i class="fa fa-edit fa-fw"></i>Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/User/Index" class="nav-link"><i class="fa fa-edit fa-fw"></i>HomePage</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                @RenderBody()
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <ul>
+            <li>@Html.ActionLink("TR", "index", new { Language = "tr" })</li>
+            <li>@Html.ActionLink("EN", "index", new { Language = "en" })</li>
+        </ul>
+        <div class="container">
+            <p class="m-0 text-center text-white"><b>BEYZA KARACA~ECE NUR ARSLAN~BERKE VAROL</b></p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

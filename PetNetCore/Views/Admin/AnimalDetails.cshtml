@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
 <h2>Detaylar</h2>
@@ -38,11 +38,12 @@
         <dt>
             @Html.DisplayName("Photo")
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-
+        @if (Model.Photo != null)
+        {
+            <dd>
+                <img width="75" src="~/images/@Model.Photo" />
+            </dd>
+        }
         <dt>
             @Html.DisplayName("Owner")
         </dt>
