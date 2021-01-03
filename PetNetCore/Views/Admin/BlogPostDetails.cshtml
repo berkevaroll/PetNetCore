@@ -1,0 +1,50 @@
+﻿@model PetNetCore.Models.BlogPostDto.List
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detaylar</h2>
+
+<div>
+    <h4>BlogPost Detaylari</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("BlogTitle")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("BlogContent")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Photo")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Added By")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back", "ManageBlogPost")
+</p>

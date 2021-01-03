@@ -9,6 +9,7 @@ namespace PetNetCore.Models
     {
         public partial class List
         {
+            public int Id { get; set; }
             public string BlogTitle { get; set; }
             public string BlogContent { get; set; }
             public string Photo { get; set; }

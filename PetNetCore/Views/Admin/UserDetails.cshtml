@@ -1,0 +1,65 @@
+﻿@model PetNetCore.Models.UserDto.Register
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detaylar</h2>
+
+<div>
+    <h4>Kullanici Detaylari</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Username")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("FirstName")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("LastName")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("BirthDate")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("City")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayName("Phone")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back", "ManageUser")
+</p>

@@ -1,35 +1,71 @@
-﻿@using PetNetCore.Models 
+﻿@using PetNetCore.Entity
 
 @{
     ViewData["Title"] = "ManageUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Manage User</h1>
+@using PetNetCore.Entity;
+@{
+    ViewData["Title"] = "ManageAnimal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Animals</h2>
 
-<h1>View</h1>
-<table class="table-primary" border="1" cellpadding="2" cellspacing="2">
+<table class="table">
+
     <tr>
-
-        <th>Username</th>
-        <th>FirstName</th>
-        <th>LastName</th>
-        <th>BirthDate</th>
-        <th>City</th>
-        <th>Phone</th>
+        <th>
+            @Html.DisplayName("Username")
+        </th>
+        <th>
+            @Html.DisplayName("FirstName")
+        </th>
+        <th>
+            @Html.DisplayName("LastName")
+        </th>
+        <th>
+            @Html.DisplayName("BirthDate")
+        </th>
+        <th>
+            @Html.DisplayName("City")
+        </th>
+        <th>
+            @Html.DisplayName("Phone")
+        </th>
+        <th></th>
     </tr>
-    @foreach (UserDto.Register user in (List<UserDto.Register>)ViewBag.users)
+
+    @foreach (User user in (List<User>)ViewBag.users)
     {
         <tr>
-            <td>@user.Username</td>
-            <td>@user.FirstName</td>
-            <td>@user.LastName</td>
-            <td>@user.BirthDate</td>
-            <td>@user.City</td>
-            <td>@user.Phone</td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Phone)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "UserDetails", new { id = user.Id })|
+                @Html.ActionLink("Delete", "DeleteUser", new { id = user.Id })
+            </td>
         </tr>
     }
+
 </table>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
